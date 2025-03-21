@@ -1,29 +1,75 @@
+/* 🌌 Category Page Background */
 .category-container {
-    text-align: center;
-    padding: 20px;
-    background: #0a0f24;
-    color: white;
-    min-height: 100vh;
-  }
-  
+  text-align: center;
+  padding: 30px;
+  background: radial-gradient(circle, #0a0f24, #040a1f);
+  color: white;
+  min-height: 100vh;
+}
+
+/* 📦 Category Grid Layout */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 🔷 Category Cards */
+.category-card {
+  background: linear-gradient(135deg, #1a1f46, #292d77, #6a77e0);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+  position: relative;
+  box-shadow: 3px 3px 10px rgba(0, 150, 255, 0.4);
+}
+
+/* 🔄 Hover Effect */
+.category-card:hover {
+  transform: scale(1.08);
+  box-shadow: 0px 5px 20px rgba(0, 255, 255, 0.7);
+}
+
+/* ✨ Glow Effect */
+.category-card::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  top: 0;
+  left: 0;
+  background: rgba(0, 150, 255, 0.2);
+  filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.category-card:hover::before {
+  opacity: 1;
+}
+
+/* 🏆 Mobile Responsive */
+@media (max-width: 768px) {
   .category-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    padding: 20px;
+      grid-template-columns: repeat(2, 1fr);
   }
-  
-  .category-card {
-    background: linear-gradient(135deg, #1a1f46, #292d77, #6a77e0);
-    color: white;
-    padding: 20px;
-    text-align: center;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: transform 0.3s;
+}
+
+@media (max-width: 480px) {
+  .category-grid {
+      grid-template-columns: 1fr;
   }
-  
-  .category-card:hover {
-    transform: scale(1.05);
-  }
-  
+}

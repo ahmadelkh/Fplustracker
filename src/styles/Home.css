@@ -1,14 +1,75 @@
-/* Home Page Styling */
+/* 🌌 Home Page Background Animation */
 .home-container {
-  text-align: center;
-  padding: 40px;
-  background: #f4f4f4;
-  min-height: 100vh;
+    text-align: center;
+    padding: 40px;
+    background: radial-gradient(circle, #0a0f24, #040a1f);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Logo Styling */
+/* ✨ Animated Background Glow */
+@keyframes backgroundGlow {
+    0% { background: radial-gradient(circle, #0a0f24, #040a1f); }
+    50% { background: radial-gradient(circle, #0c1328, #06102a); }
+    100% { background: radial-gradient(circle, #0a0f24, #040a1f); }
+}
+
+.home-container {
+    animation: backgroundGlow 6s infinite alternate;
+}
+
+/* 🚀 Floating & Pulsing Logo */
 .logo {
-  width: 150px;  /* Adjust size as needed */
-  height: auto;
-  margin-bottom: 20px;
+    width: 200px;
+    height: auto;
+    filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.6));
+    animation: float 4s ease-in-out infinite, pulse 3s infinite alternate;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* 🌊 Floating Animation */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* 🔥 Pulsing Glow */
+@keyframes pulse {
+    0% { filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.6)); }
+    100% { filter: drop-shadow(0px 0px 20px rgba(0, 150, 255, 0.8)); }
+}
+
+/* 🎭 Logo Hover Effect */
+.logo:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0px 0px 15px rgba(0, 255, 255, 0.9));
+}
+
+/* 🏆 Welcome Title */
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    margin-top: 20px;
+    text-shadow: 0px 0px 20px rgba(0, 150, 255, 0.8);
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* 🎉 Welcome Subtitle */
+p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* ✨ Text Fade-in Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0px); }
 }

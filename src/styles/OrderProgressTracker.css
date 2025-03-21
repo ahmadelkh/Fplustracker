@@ -1,4 +1,4 @@
-/* 📍 General Styling */
+/* 🌌 AI-Enhanced Progress Wrapper */
 .progress-wrapper {
   text-align: center;
   margin-top: 20px;
@@ -6,6 +6,7 @@
   background: url('https://www.transparenttextures.com/patterns/asfalt-dark.png'); /* 🔥 SVG Background */
   padding: 20px;
   border-radius: 10px;
+  box-shadow: 0px 5px 20px rgba(0, 255, 255, 0.3);
 }
 
 /* 📍 Steps Container */
@@ -27,7 +28,7 @@
   transition: all 0.5s ease-in-out;
 }
 
-/* 🔄 Add Animation to Steps */
+/* 🔄 Animated Steps */
 .animate-step {
   opacity: 0;
   transform: scale(0.8);
@@ -45,7 +46,7 @@
   }
 }
 
-/* 🔵 3D Icons */
+/* 🔵 3D Step Icons */
 .progress-icon {
   background: linear-gradient(145deg, #e0e0e0, #ffffff);
   border-radius: 50%;
@@ -81,13 +82,13 @@
   box-shadow: 0px 0px 15px rgba(255, 152, 0, 1);
 }
 
-/* 📍 Label */
+/* 📍 Step Labels */
 .progress-label {
   display: block;
   margin-top: 5px;
   font-size: 16px;
   font-weight: bold;
-  color: white; /* Increased Visibility */
+  color: white; /* 🔥 Improved Contrast */
   text-transform: uppercase;
 }
 
@@ -95,9 +96,10 @@
 .progress-timestamp {
   display: block;
   font-size: 12px;
-  color: #000000;
+  color: #e0e0e0;
 }
-/* 🔄 Progress Bar */
+
+/* 📊 Animated Progress Bar */
 .progress-bar-container {
   width: 80%;
   height: 14px;
@@ -108,7 +110,16 @@
   position: relative;
 }
 
-/* 📊 Animated Progress Bar */
+/* 🚀 Moving Truck Effect */
+.truck-icon {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  font-size: 20px;
+  transition: left 0.5s ease-in-out;
+}
+
+/* 🔄 Progress Bar */
 .progress-bar {
   height: 100%;
   background: linear-gradient(90deg, #ff9800, #ffb74d);
@@ -127,10 +138,9 @@
 .progress-percentage {
   font-size: 16px;
   font-weight: bold;
-  color: #000000;
+  color: #ffffff;
   margin-top: 5px;
 }
-
 
 /* 🔥 Glowing Animation */
 @keyframes pulse {
@@ -166,7 +176,7 @@
   }
 }
 
-/* 📱 Mobile Responsive */
+/* 📱 Mobile Optimization */
 @media (max-width: 768px) {
   .progress-container {
     flex-direction: column;
@@ -174,5 +184,8 @@
   .progress-icon {
     width: 40px;
     height: 40px;
+  }
+  .progress-bar-container {
+    width: 90%;
   }
 }

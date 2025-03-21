@@ -116,14 +116,31 @@
 }
 
 /* 📱 Responsive Design */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .filter-container {
     flex-direction: column;
     align-items: center;
   }
+  
   .filter-container input {
     width: 90%;
   }
+  
+  .inventory-list {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-container {
+    padding: 10px;
+  }
+
+  .inventory-item {
+    padding: 15px;
+    font-size: 14px;
+  }
+  
   .inventory-list {
     grid-template-columns: 1fr;
   }

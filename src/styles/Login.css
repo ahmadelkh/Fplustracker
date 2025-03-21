@@ -1,41 +1,80 @@
+/* 🔵 Centered Login Container */
 .login-container {
-    width: 300px;
-    margin: 100px auto;
-    text-align: center;
-    padding: 20px;
-    background: white;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+  width: 90%;
+  max-width: 350px;
+  margin: 100px auto;
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #1a1f46, #292d77, #6a77e0);
+  color: white;
+  box-shadow: 0px 5px 15px rgba(0, 150, 255, 0.3);
+  border-radius: 12px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* ✨ Heading */
+.login-container h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* 🖋️ Input Fields */
+.login-container input {
+  width: 90%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-container input::placeholder {
+  color: #a0a0a0;
+}
+
+/* 🟢 Input Glow Effect */
+.login-container input:focus {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.3);
+}
+
+/* 🔵 Login Button */
+.login-container button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #ff9800, #ffb74d);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-container button:hover {
+  background: linear-gradient(90deg, #ffb74d, #ff9800);
+  transform: scale(1.05);
+}
+
+/* ❌ Error Message */
+.error-message {
+  color: #ff4d4d;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 600px) {
+  .login-container {
+      width: 95%;
+      padding: 15px;
   }
   
-  h2 {
-    margin-bottom: 20px;
+  .login-container input {
+      width: 95%;
   }
-  
-  input {
-    width: 90%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  button {
-    width: 100%;
-    padding: 10px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background: #0056b3;
-  }
-  
-  .error-message {
-    color: red;
-    margin-top: 10px;
-  }
-  
+}

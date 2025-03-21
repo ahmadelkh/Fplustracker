@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Home.css";
-import logo from "../assets/logo.png"; // Import logo
+import logo from "../assets/logo.png"; // Ensure you have the correct logo path
 
 const Home = () => {
   return (

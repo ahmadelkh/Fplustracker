@@ -1,37 +1,59 @@
 /* App Styling */
 .app-container {
-    font-family: Arial, sans-serif;
-    text-align: center;
-  }
-  
-  /* Navbar Styling */
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+/* Navbar Styling */
+.navbar {
+  background: #007bff;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Navbar List */
+.navbar ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar ul li {
+  display: inline;
+}
+
+/* Navbar Links */
+.navbar ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.navbar ul li a:hover {
+  color: #ffdd57;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .navbar {
-    background: #007bff;
-    padding: 15px;
+      flex-direction: column;
+      padding: 10px;
   }
-  
+
   .navbar ul {
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 0;
-    margin: 0;
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
   }
-  
-  .navbar ul li {
-    display: inline;
-  }
-  
+
   .navbar ul li a {
-    text-decoration: none;
-    color: white;
-    font-size: 1.2rem;
-    font-weight: bold;
-    transition: 0.3s;
+      font-size: 1rem;
   }
-  
-  .navbar ul li a:hover {
-    color: #ffdd57;
-  }
-  
+}

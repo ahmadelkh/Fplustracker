@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes, Link, useNavigate } from "react-router-dom";
+import { Route, Routes, Link, useNavigate, Navigate } from "react-router-dom"; // ✅ Import Navigate
 import Home from "./pages/Home";
 import OrderTracking from "./pages/OrderTracking";
 import InventoryListPage from "./pages/InventoryView"; // Corrected import
@@ -34,7 +34,7 @@ const App = () => {
       {/* Navigation Bar */}
       <nav className="navbar">
         <ul>
-          <li><Link to="/">Home</Link></li>
+          <li><Link to="/home">Home</Link></li> {/* ✅ Changed to /home */}
           <li><Link to="/order-tracking">Order Tracking</Link></li>
           <li><Link to="/categories">View Inventory</Link></li>
           <li><Link to="/procurement">Procurement</Link></li> {/* New Procurement Link */}
@@ -49,7 +49,8 @@ const App = () => {
 
       {/* Page Routing */}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Navigate to="/home" />} /> {/* ✅ Redirect root "/" to "/home" */}
+        <Route path="/home" element={<Home />} /> {/* ✅ Explicit Home Route */}
         <Route path="/order-tracking" element={<OrderTracking userRole={userRole} />} />
         <Route path="/categories" element={<CategoryPage />} />
         <Route path="/inventory/:category" element={<InventoryListPage />} />

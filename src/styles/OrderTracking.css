@@ -1,59 +1,101 @@
+/* 🌍 General Container */
 .order-tracking-container {
   text-align: center;
   padding: 40px;
-  background: #f4f4f4;
+  background: #0a0f24;
   min-height: 100vh;
+  color: white;
 }
 
-/* Search Bar */
+/* 🔍 Search & Filter */
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+}
+
 .search-bar {
-  width: 50%;
-  padding: 10px;
+  padding: 12px;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 15px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  width: 250px;
+  outline: none;
+  transition: all 0.3s ease-in-out;
 }
 
-/* Table Styling */
+.search-bar::placeholder {
+  color: #a0a0a0;
+}
+
+.search-bar:focus {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.3);
+}
+
+/* 🔵 Select Status Filter */
+.status-filter {
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(90deg, #2196f3, #64b5f6);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.status-filter:hover {
+  background: linear-gradient(90deg, #64b5f6, #2196f3);
+  transform: scale(1.05);
+}
+
+/* 📊 Order Table */
 .order-table {
   width: 80%;
-  margin: 0 auto;
+  margin: 20px auto;
   border-collapse: collapse;
-  background: white;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 2px 10px rgba(0, 255, 255, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .order-table th, .order-table td {
   padding: 12px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   text-align: center;
-}
-
-.order-table th {
-  background: #333;
   color: white;
 }
 
-/* Clickable rows */
+.order-table th {
+  background: linear-gradient(90deg, #292d77, #6a77e0);
+  color: white;
+  font-size: 1.1rem;
+}
+
+/* 🔄 Clickable Rows */
 .clickable {
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .clickable:hover {
-  background: #007bff;
-  color: white;
+  background: rgba(0, 255, 255, 0.2);
 }
 
-/* Order Status Colors */
+/* 🟡 Status Colors */
 .status.pending {
-  color: #d97706;
+  color: #ffcc00;
   font-weight: bold;
 }
 
 .status.in-progress {
-  color: #2563eb;
+  color: #2196f3;
   font-weight: bold;
 }
 
@@ -62,23 +104,23 @@
   font-weight: bold;
 }
 
-/* Order Details */
+/* 📄 Order Details */
 .order-details {
-  background: white;
+  background: rgba(255, 255, 255, 0.1);
   padding: 20px;
   margin: 20px auto;
   width: 60%;
   border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px rgba(0, 255, 255, 0.3);
 }
 
-/* Task List */
+/* 📝 Task List */
 .step {
   list-style-type: none;
   padding: 12px;
   margin: 8px 0;
-  background: #f9f9f9;
-  border: 1px solid #ddd;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -86,7 +128,7 @@
   transition: 0.3s;
 }
 
-/* Task Info */
+/* 🎯 Task Info */
 .task-info {
   display: flex;
   flex-direction: column;
@@ -97,11 +139,11 @@
 
 .task-time {
   font-size: 0.8rem;
-  color: #666;
+  color: rgba(255, 255, 255, 0.6);
   margin-top: 3px;
 }
 
-/* Buttons */
+/* 🎯 Action Buttons */
 .action-btn {
   padding: 5px 8px;
   font-size: 0.8rem;
@@ -114,37 +156,44 @@
   justify-content: center;
 }
 
+/* ✅ Done Button */
 .action-btn.done {
-  background: #16a34a;
+  background: linear-gradient(145deg, #16a34a, #1db954);
   color: white;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 28px;
+  height: 28px;
   font-size: 14px;
-  border-radius: 4px; /* Slightly rounded corners */
-  padding: 0;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s;
+  border-radius: 50%;
+  box-shadow: 0px 0px 10px rgba(22, 163, 74, 1);
+  transition: all 0.3s ease-in-out;
 }
 
 .action-btn.done:hover {
   background: #128c3a;
+  transform: scale(1.2);
 }
 
+/* ❌ Delete Button */
 .action-btn.delete {
-  background: #dc2626;
+  background: linear-gradient(145deg, #dc2626, #ff4d4d);
   color: white;
   font-size: 0.85rem;
+  padding: 6px 10px;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
 }
 
+.action-btn.delete:hover {
+  background: #b71c1c;
+  transform: scale(1.05);
+}
+
+/* 🔄 Hover Effect */
 .action-btn:hover {
   opacity: 0.8;
 }
 
-/* Footer Logout */
+/* 🔚 Footer Logout */
 .footer {
   text-align: center;
   padding: 15px;
@@ -152,7 +201,7 @@
 }
 
 .logout-btn {
-  background: #444;
+  background: linear-gradient(145deg, #444, #555);
   color: white;
   padding: 8px 12px;
   border-radius: 4px;
@@ -163,4 +212,25 @@
 
 .logout-btn:hover {
   opacity: 0.8;
+  transform: scale(1.05);
+}
+
+/* 📱 Mobile Optimization */
+@media (max-width: 768px) {
+  .filter-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search-bar {
+    width: 90%;
+  }
+
+  .order-table {
+    width: 95%;
+  }
+
+  .order-details {
+    width: 90%;
+  }
 }
