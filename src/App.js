@@ -58,7 +58,7 @@ const App = () => {
 
       {/* ✅ Page Routing */}
       <Routes>
-        <Route path="/" element={<Navigate to="/home" />} />
+      <Route path="/" element={<Home />} />  {/* ✅ FIXED DEFAULT HOME PAGE */}
         <Route path="/home" element={<Home />} />
         <Route path="/order-tracking" element={<OrderTracking userRole={userRole} />} />
         <Route path="/categories" element={<CategoryPage />} />
