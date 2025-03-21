@@ -1,0 +1,130 @@
+/* 🌌 Inventory Page Background */
+.inventory-container {
+  text-align: center;
+  padding: 20px;
+  background: radial-gradient(circle, #0a0f24, #040a1f);
+  color: white;
+  min-height: 100vh;
+}
+
+/* 🔍 Search & Filter Container */
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+}
+
+.filter-container input {
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  width: 200px;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.filter-container input::placeholder {
+  color: #a0a0a0;
+}
+
+.filter-container input:focus {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.3);
+}
+
+/* 🔵 Search Button */
+.search-button {
+  padding: 12px 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #ff9800, #ffb74d);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.search-button:hover {
+  background: linear-gradient(90deg, #ffb74d, #ff9800);
+  transform: scale(1.05);
+}
+
+/* 🟡 Inventory List Grid */
+.inventory-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+/* 🟠 AI-Powered Inventory Cards */
+.inventory-item {
+  background: linear-gradient(135deg, #1a1f46, #292d77, #6a77e0);
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: left;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 3px 3px 10px rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+/* 🟣 3D Hover Effect */
+.inventory-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 5px 20px rgba(0, 255, 255, 0.3);
+}
+
+/* 🔴 Low Stock Highlight */
+.inventory-item.low-stock {
+  box-shadow: 0px 0px 15px rgba(255, 69, 0, 0.8);
+  animation: pulse 1.5s infinite alternate;
+}
+
+/* 🔁 AI Glow Effect for Critical Items */
+@keyframes pulse {
+  0% {
+    box-shadow: 0px 0px 10px rgba(255, 69, 0, 0.5);
+  }
+  100% {
+    box-shadow: 0px 0px 20px rgba(255, 69, 0, 1);
+  }
+}
+
+/* ✅ Item Details */
+.inventory-item .code {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffcc00;
+}
+
+.inventory-item .description {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.inventory-item .quantity {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 8px;
+  color: cyan;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 600px) {
+  .filter-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .filter-container input {
+    width: 90%;
+  }
+  .inventory-list {
+    grid-template-columns: 1fr;
+  }
+}

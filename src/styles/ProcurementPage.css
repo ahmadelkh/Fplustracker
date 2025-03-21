@@ -1,0 +1,83 @@
+/* Procurement Page Container */
+.procurement-container {
+  text-align: center;
+  padding: 20px;
+  background: #0a0f24;
+  color: white;
+  min-height: 100vh;
+}
+
+/* Tab Navigation */
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab-buttons button {
+  padding: 10px 20px;
+  border: none;
+  background: #292d77;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0 10px;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+}
+
+.tab-buttons button.active {
+  background: #6a77e0;
+  font-weight: bold;
+}
+
+.tab-buttons button:hover {
+  background: #6a77e0;
+}
+
+/* Table Styling */
+.table-container {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #292d77;
+  color: white;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background: #6a77e0;
+}
+
+.urgent-alert {
+  background: red;
+  color: white;
+  font-weight: bold;
+}
+
+.low-stock-row {
+  background: #ff8c00;
+  color: white;
+}
+
+/* No Data */
+.no-data {
+  font-size: 16px;
+  color: #ff4c4c;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .tab-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}

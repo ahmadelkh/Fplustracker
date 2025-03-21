@@ -1,0 +1,14 @@
+/* Home Page Styling */
+.home-container {
+  text-align: center;
+  padding: 40px;
+  background: #f4f4f4;
+  min-height: 100vh;
+}
+
+/* Logo Styling */
+.logo {
+  width: 150px;  /* Adjust size as needed */
+  height: auto;
+  margin-bottom: 20px;
+}

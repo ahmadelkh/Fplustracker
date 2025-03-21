@@ -1,0 +1,166 @@
+.order-tracking-container {
+  text-align: center;
+  padding: 40px;
+  background: #f4f4f4;
+  min-height: 100vh;
+}
+
+/* Search Bar */
+.search-bar {
+  width: 50%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+/* Table Styling */
+.order-table {
+  width: 80%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-table th, .order-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.order-table th {
+  background: #333;
+  color: white;
+}
+
+/* Clickable rows */
+.clickable {
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.clickable:hover {
+  background: #007bff;
+  color: white;
+}
+
+/* Order Status Colors */
+.status.pending {
+  color: #d97706;
+  font-weight: bold;
+}
+
+.status.in-progress {
+  color: #2563eb;
+  font-weight: bold;
+}
+
+.status.done {
+  color: #16a34a;
+  font-weight: bold;
+}
+
+/* Order Details */
+.order-details {
+  background: white;
+  padding: 20px;
+  margin: 20px auto;
+  width: 60%;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Task List */
+.step {
+  list-style-type: none;
+  padding: 12px;
+  margin: 8px 0;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: 0.3s;
+}
+
+/* Task Info */
+.task-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  flex-grow: 1;
+  padding-left: 10px;
+}
+
+.task-time {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 3px;
+}
+
+/* Buttons */
+.action-btn {
+  padding: 5px 8px;
+  font-size: 0.8rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn.done {
+  background: #16a34a;
+  color: white;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border-radius: 4px; /* Slightly rounded corners */
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.action-btn.done:hover {
+  background: #128c3a;
+}
+
+.action-btn.delete {
+  background: #dc2626;
+  color: white;
+  font-size: 0.85rem;
+}
+
+.action-btn:hover {
+  opacity: 0.8;
+}
+
+/* Footer Logout */
+.footer {
+  text-align: center;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.logout-btn {
+  background: #444;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 0.85rem;
+}
+
+.logout-btn:hover {
+  opacity: 0.8;
+}
