@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Fplustracker/static/css/main.e7e2d7de.css",
+    "main.js": "/Fplustracker/static/js/main.595f1a11.js",
+    "static/media/logo.png": "/Fplustracker/static/media/logo.193ec96194221da9ddef.png",
+    "index.html": "/Fplustracker/index.html",
+    "main.e7e2d7de.css.map": "/Fplustracker/static/css/main.e7e2d7de.css.map",
+    "main.595f1a11.js.map": "/Fplustracker/static/js/main.595f1a11.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e7e2d7de.css",
+    "static/js/main.595f1a11.js"
+  ]
+}
