@@ -44,7 +44,7 @@
   border-radius: 8px;
   border: none;
   background: linear-gradient(90deg, #2196f3, #64b5f6);
-  color: white;
+  color: rgb(0, 0, 0);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
@@ -223,7 +223,8 @@
   }
 
   .search-bar {
-    width: 90%;
+    width: 100%;
+    font-size: 16px;
   }
 
   .order-table {

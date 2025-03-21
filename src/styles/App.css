@@ -1,34 +1,39 @@
-/* App Styling */
-.app-container {
-  font-family: Arial, sans-serif;
-  text-align: center;
-}
-
-/* Navbar Styling */
+/* ✅ Navbar Styling */
 .navbar {
   background: #007bff;
-  padding: 15px;
+  padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  color: white;
 }
 
-/* Navbar List */
-.navbar ul {
+/* ✅ Logo Styling */
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* ✅ Navbar List */
+.nav-links {
   list-style-type: none;
   display: flex;
-  justify-content: center;
   gap: 20px;
   padding: 0;
   margin: 0;
+  margin-left: 20px; /* ✅ Push links to the left */
 }
 
-.navbar ul li {
+.nav-links li {
   display: inline;
 }
 
-/* Navbar Links */
-.navbar ul li a {
+/* ✅ Navbar Links */
+.nav-links li a {
   text-decoration: none;
   color: white;
   font-size: 1.2rem;
@@ -36,24 +41,62 @@
   transition: 0.3s;
 }
 
-.navbar ul li a:hover {
+.nav-links li a:hover {
   color: #ffdd57;
 }
 
-/* Responsive Design */
+/* ✅ Logout Button */
+.logout-btn {
+  background: #ff4c4c;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background: #cc0000;
+}
+
+/* ✅ Mobile Responsive - Hide Menu Initially */
+.menu-btn {
+  display: none;
+  font-size: 1.5rem;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* 📱 Mobile View */
 @media (max-width: 768px) {
-  .navbar {
-      flex-direction: column;
-      padding: 10px;
+  .menu-btn {
+    display: block;
   }
 
-  .navbar ul {
-      flex-direction: column;
-      gap: 10px;
-      text-align: center;
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background: #007bff;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
   }
 
-  .navbar ul li a {
-      font-size: 1rem;
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links li {
+    padding: 10px 0;
+  }
+
+  .nav-links li a {
+    font-size: 1rem;
   }
 }
