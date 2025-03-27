@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes, Link, useNavigate, Navigate } from "react-router-dom";
+import { Routes, Route, Link, useNavigate, Navigate } from "react-router-dom"; // ❌ Removed <Router>
 import Home from "./pages/Home";
 import OrderTracking from "./pages/OrderTracking";
 import InventoryListPage from "./pages/InventoryView"; 
 import CategoryPage from "./pages/CategoryPage";
 import ProcurementPage from "./pages/ProcurementPage";
-import Analysis from "./components/Analysis";
+import AnalysisPage from "./pages/AnalysisPage";
 import Login from "./pages/Login";
 import "./styles/App.css";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState(null);
-  const [menuOpen, setMenuOpen] = useState(false); // ✅ Track mobile menu state
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,12 +34,10 @@ const App = () => {
     <div className="app-container">
       {/* ✅ Navbar */}
       <nav className="navbar">
-        <div className="logo">FPlus Tracker</div> {/* ✅ Add logo */}
-        
-        {/* ✅ Menu Button for Mobile */}
-        <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>
-          ☰
-        </button>
+        <div className="logo">FPlus Tracker</div>
+
+        {/* ✅ Mobile Menu Button */}
+        <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>☰</button>
 
         {/* ✅ Navigation Links */}
         <ul className={`nav-links ${menuOpen ? "open" : ""}`}>
@@ -58,13 +56,13 @@ const App = () => {
 
       {/* ✅ Page Routing */}
       <Routes>
-      <Route path="/" element={<Home />} />  {/* ✅ FIXED DEFAULT HOME PAGE */}
+        <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/home" element={<Home />} />
         <Route path="/order-tracking" element={<OrderTracking userRole={userRole} />} />
         <Route path="/categories" element={<CategoryPage />} />
         <Route path="/inventory/:category" element={<InventoryListPage />} />
         <Route path="/procurement" element={<ProcurementPage />} />
-        <Route path="/analysis" element={<Analysis />} />
+        <Route path="/analysis" element={<AnalysisPage />} />
         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUserRole={setUserRole} />} />
       </Routes>
     </div>
