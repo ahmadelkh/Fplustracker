@@ -1,32 +1,31 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { db } from "../firebaseConfig"; // Firestore config
-import { collection, getDocs, doc, updateDoc, deleteDoc, query, where } from "firebase/firestore";
+import { db } from "../firebaseConfig";
+import { collection, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import "../styles/OrderTracking.css";
 import { useNavigate } from "react-router-dom";
-import OrderProgressTracker from "../components/OrderProgressTracker"; // ✅ Import Progress Tracker
-
-
+import OrderProgressTracker from "../components/OrderProgressTracker";
 
 const OrderTracking = () => {
   const [orders, setOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchDate, setSearchDate] = useState("");
-  const [statusFilter, setStatusFilter] = useState(""); // New state for filtering by status
+  const [statusFilter, setStatusFilter] = useState("");
+  const [receivedDateFilter, setReceivedDateFilter] = useState("");
+  const [productionDateFilter, setProductionDateFilter] = useState("");
+  const [deliveryDateFilter, setDeliveryDateFilter] = useState("");
   const [userRole, setUserRole] = useState(null);
   const navigate = useNavigate();
 
-  // ✅ Wrap fetchOrders inside useCallback to avoid infinite loops
   const fetchOrders = useCallback(async () => {
     try {
       const querySnapshot = await getDocs(collection(db, "orders"));
       const orderList = querySnapshot.docs.map((doc) => {
-        const orderData = doc.data();
+        const data = doc.data();
         return {
           id: doc.id,
-          ...orderData,
-          status: determineOrderStatus(orderData.steps || []),
+          ...data,
+          status: determineOrderStatus(data.steps || []),
         };
       });
       setOrders(orderList);
@@ -58,32 +57,14 @@ const OrderTracking = () => {
   useEffect(() => {
     fetchOrders();
     checkUserRole();
-  }, [fetchOrders]); // ✅ Now fetchOrders is included safely
+  }, [fetchOrders]);
 
   const filterOrdersByCode = (query) => {
     setSearchQuery(query);
-    setFilteredOrders(
-      orders.filter((order) => order.id.toLowerCase().includes(query.toLowerCase()))
+    const filtered = orders.filter((order) =>
+      order.id.toLowerCase().includes(query.toLowerCase())
     );
-  };
-
-  const filterOrdersByDate = async (date) => {
-    setSearchDate(date);
-    try {
-      const startOfDay = new Date(date);
-      const endOfDay = new Date(date);
-      endOfDay.setHours(23, 59, 59, 999);
-
-      const q = query(
-        collection(db, "orders"),
-        where("activeDate", ">=", startOfDay.toISOString()),
-        where("activeDate", "<", endOfDay.toISOString())
-      );
-      const querySnapshot = await getDocs(q);
-      setFilteredOrders(querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-    } catch (error) {
-      console.error("Error filtering orders by date:", error);
-    }
+    setFilteredOrders(filtered);
   };
 
   const updateTaskStatus = async (orderId, stepIndex) => {
@@ -92,10 +73,9 @@ const OrderTracking = () => {
       const orderRef = doc(db, "orders", orderId);
       const updatedSteps = [...selectedOrder.steps];
       updatedSteps[stepIndex].status = "Done";
-
       await updateDoc(orderRef, { steps: updatedSteps });
       fetchOrders();
-      setSelectedOrder({ ...selectedOrder, steps: updatedSteps, status: determineOrderStatus(updatedSteps) });
+      setSelectedOrder({ ...selectedOrder, steps: updatedSteps });
     } catch (error) {
       console.error("Error updating task status:", error);
     }
@@ -113,64 +93,150 @@ const OrderTracking = () => {
     }
   };
 
+  const applyFilters = (ordersList) => {
+    return ordersList
+      .filter(order => !statusFilter || order.status === statusFilter)
+      .filter(order => order.id.toLowerCase().includes(searchQuery.toLowerCase()))
+      .filter(order => !receivedDateFilter || (
+        order.receivedDate &&
+        new Date(order.receivedDate).toDateString() === new Date(receivedDateFilter).toDateString()
+      ))
+      .filter(order => !productionDateFilter || (
+        order.productionStartDate &&
+        new Date(order.productionStartDate).toDateString() === new Date(productionDateFilter).toDateString()
+      ))
+      .filter(order => !deliveryDateFilter || (
+        order.deliveryDate &&
+        new Date(order.deliveryDate).toDateString() === new Date(deliveryDateFilter).toDateString()
+      ));
+  };
+
+const getRowHighlightClass = (deliveryDate) => {
+  if (!deliveryDate) return "";
+
+  const delivery = new Date(deliveryDate);
+  const today = new Date();
+
+  // Reset to midnight (remove time from comparison)
+  const deliveryMidnight = new Date(delivery.getFullYear(), delivery.getMonth(), delivery.getDate());
+  const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+  const diffTime = deliveryMidnight.getTime() - todayMidnight.getTime();
+  const diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+  if (diffDays <= 0) return "highlight-red";           // today or overdue
+  if (diffDays <= 3) return "highlight-orange";        // within 3 days
+  return "";
+};
+
+
+
+  const filtered = applyFilters(filteredOrders);
+
   return (
     <div className="order-tracking-container">
       <h1>Order Tracking</h1>
 
-      <input
-        type="text"
-        placeholder="Search by Order ID"
-        value={searchQuery}
-        onChange={(e) => filterOrdersByCode(e.target.value)}
-        className="search-bar"
-      />
+      <div className="filter-container">
+        <div className="filter-group">
+          <label>Search by Order ID</label>
+          <input
+            type="text"
+            placeholder="Order ID"
+            value={searchQuery}
+            onChange={(e) => filterOrdersByCode(e.target.value)}
+            className="search-bar"
+          />
+        </div>
 
-      <input
-        type="date"
-        value={searchDate}
-        onChange={(e) => filterOrdersByDate(e.target.value)}
-        className="search-bar"
-      />
+        <div className="filter-group">
+          <label>Received Date</label>
+          <input
+            type="date"
+            value={receivedDateFilter}
+            onChange={(e) => setReceivedDateFilter(e.target.value)}
+            className="search-bar"
+          />
+        </div>
 
-<div className="filter-container">
+        <div className="filter-group">
+          <label>Production Start Date</label>
+          <input
+            type="date"
+            value={productionDateFilter}
+            onChange={(e) => setProductionDateFilter(e.target.value)}
+            className="search-bar"
+          />
+        </div>
 
+        <div className="filter-group">
+          <label>Delivery Date</label>
+          <input
+            type="date"
+            value={deliveryDateFilter}
+            onChange={(e) => setDeliveryDateFilter(e.target.value)}
+            className="search-bar"
+          />
+        </div>
 
-  <select
-    className="status-filter"
-    value={statusFilter}
-    onChange={(e) => setStatusFilter(e.target.value)}
-  >
-    <option value="">All</option>
-    <option value="In Progress">In Progress</option>
-    <option value="Done">Done</option>
-  </select>
-</div>
+        <div className="filter-group">
+          <label>Status</label>
+          <select
+            className="status-filter"
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
+            <option value="">All</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Done">Done</option>
+          </select>
+        </div>
+      </div>
 
+      {userRole === "manager" && (
+        <div style={{ textAlign: "right", marginBottom: "15px" }}>
+          <button className="add-order-btn" onClick={() => navigate("/add-order")}>
+            ➕ Add New Order
+          </button>
+        </div>
+      )}
 
       {!selectedOrder ? (
         <table className="order-table">
           <thead>
             <tr>
               <th>Order ID</th>
-              <th>Predicted Completion Date</th>
+              <th>Received Date</th>
+              <th>Production Start</th>
+              <th>Delivery Date</th>
+              <th>Predicted Completion</th>
               <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            {filteredOrders.length > 0 ? (
-              filteredOrders
-              .filter(order => !statusFilter || order.status === statusFilter) // Apply status filter
-              .map((order) => (
-            
-                <tr key={order.id} onClick={() => setSelectedOrder(order)} className="clickable">
-                  <td>{order.id}</td>
+            {filtered.length > 0 ? (
+              filtered.map((order) => (
+                <tr
+                  key={order.id}
+                  onClick={() => setSelectedOrder(order)}
+                  className={`clickable ${getRowHighlightClass(order.deliveryDate)}`}
+                >
+                  <td>
+                    {order.id}
+                    {getRowHighlightClass(order.deliveryDate) && (
+                      <span style={{ marginLeft: "6px", color: "orange" }}>⚠️</span>
+                    )}
+                  </td>
+                  <td>{order.receivedDate ? new Date(order.receivedDate).toLocaleDateString() : "N/A"}</td>
+                  <td>{order.productionStartDate ? new Date(order.productionStartDate).toLocaleDateString() : "N/A"}</td>
+                  <td>{order.deliveryDate ? new Date(order.deliveryDate).toLocaleDateString() : "N/A"}</td>
                   <td>{order.predictedDate ? new Date(order.predictedDate).toLocaleDateString() : "N/A"}</td>
                   <td className={`status ${order.status.toLowerCase()}`}>{order.status}</td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="3" className="no-results">No orders found</td>
+                <td colSpan="6" className="no-results">No orders found</td>
               </tr>
             )}
           </tbody>
@@ -178,7 +244,10 @@ const OrderTracking = () => {
       ) : (
         <div className="order-details">
           <h2>Order: {selectedOrder.id}</h2>
-          <p>Predicted Completion: {selectedOrder.predictedDate ? new Date(selectedOrder.predictedDate).toLocaleString() : "N/A"}</p>
+          <p><strong>Received Date:</strong> {selectedOrder.receivedDate ? new Date(selectedOrder.receivedDate).toLocaleString() : "N/A"}</p>
+          <p><strong>Production Start:</strong> {selectedOrder.productionStartDate ? new Date(selectedOrder.productionStartDate).toLocaleString() : "N/A"}</p>
+          <p><strong>Delivery Date:</strong> {selectedOrder.deliveryDate ? new Date(selectedOrder.deliveryDate).toLocaleString() : "N/A"}</p>
+          <p><strong>Predicted Completion:</strong> {selectedOrder.predictedDate ? new Date(selectedOrder.predictedDate).toLocaleString() : "N/A"}</p>
 
           <h3>Tasks:</h3>
           <ul>
@@ -200,19 +269,10 @@ const OrderTracking = () => {
 
           <OrderProgressTracker steps={selectedOrder.steps} />
 
-
-          
           {userRole === "manager" && (
             <button className="action-btn delete" onClick={() => deleteOrder(selectedOrder.id)}>❌ Delete</button>
           )}
-          
           <button className="back-btn" onClick={() => setSelectedOrder(null)}>Back to Orders</button>
-        </div>
-      )}
-      
-      {userRole && (
-        <div className="footer">
-          <button className="logout-btn" onClick={handleLogout}>Logout</button>
         </div>
       )}
     </div>

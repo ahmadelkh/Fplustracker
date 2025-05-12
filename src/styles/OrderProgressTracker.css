@@ -3,27 +3,29 @@
   text-align: center;
   margin-top: 20px;
   position: relative;
-  background: url('https://www.transparenttextures.com/patterns/asfalt-dark.png'); /* 🔥 SVG Background */
+  background: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 5px 20px rgba(0, 255, 255, 0.3);
 }
 
-/* 📍 Steps Container */
+/* 📍 Steps Container - NOW SCROLLABLE */
 .progress-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 20px auto;
-  width: 90%;
-  padding: 10px 0;
-  position: relative;
+  gap: 30px;
+  overflow-x: auto;
+  padding: 20px 10px;
+  scroll-behavior: smooth;
+  margin: 0 auto;
+  width: 95%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* 📍 Each Step */
 .progress-step {
   text-align: center;
-  flex: 1;
+  min-width: 80px;
+  flex-shrink: 0;
   position: relative;
   transition: all 0.5s ease-in-out;
 }
@@ -88,7 +90,7 @@
   margin-top: 5px;
   font-size: 16px;
   font-weight: bold;
-  color: white; /* 🔥 Improved Contrast */
+  color: white;
   text-transform: uppercase;
 }
 
@@ -179,13 +181,32 @@
 /* 📱 Mobile Optimization */
 @media (max-width: 768px) {
   .progress-container {
-    flex-direction: column;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 20px;
+    padding-bottom: 10px;
   }
+
   .progress-icon {
     width: 40px;
     height: 40px;
   }
+
   .progress-bar-container {
     width: 90%;
   }
+}
+
+/* 🌐 Scrollbar Styling */
+.progress-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.progress-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.progress-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

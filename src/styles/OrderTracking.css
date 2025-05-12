@@ -56,7 +56,7 @@
 
 /* 📊 Order Table */
 .order-table {
-  width: 80%;
+  width: 90%;
   margin: 20px auto;
   border-collapse: collapse;
   background: rgba(255, 255, 255, 0.1);
@@ -65,7 +65,8 @@
   overflow: hidden;
 }
 
-.order-table th, .order-table td {
+.order-table th,
+.order-table td {
   padding: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   text-align: center;
@@ -193,26 +194,23 @@
   opacity: 0.8;
 }
 
-/* 🔚 Footer Logout */
-.footer {
-  text-align: center;
+/* 🔄 Order Progress Layout Fix */
+.order-progress-container {
+  overflow-x: auto;
+  white-space: nowrap;
   padding: 15px;
   margin-top: 20px;
 }
 
-.logout-btn {
-  background: linear-gradient(145deg, #444, #555);
-  color: white;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: 0.3s;
-  font-size: 0.85rem;
+.step-progress {
+  display: inline-flex;
+  gap: 20px;
+  padding-bottom: 10px;
 }
 
-.logout-btn:hover {
-  opacity: 0.8;
-  transform: scale(1.05);
+.step-progress .step-circle {
+  min-width: 60px;
+  text-align: center;
 }
 
 /* 📱 Mobile Optimization */
@@ -228,10 +226,35 @@
   }
 
   .order-table {
-    width: 95%;
+    width: 100%;
   }
 
   .order-details {
-    width: 90%;
+    width: 95%;
   }
+
+  .step-progress {
+    gap: 10px;
+  }
+}
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.filter-group label {
+  font-size: 0.85rem;
+  color: #ccc;
+  margin-bottom: 4px;
+  padding-left: 4px;
+}
+.highlight-orange {
+  background-color: rgba(255, 165, 0, 0.1);
+  border-left: 4px solid orange;
+}
+
+.highlight-red {
+  background-color: rgba(255, 0, 0, 0.1);
+  border-left: 4px solid red;
 }
