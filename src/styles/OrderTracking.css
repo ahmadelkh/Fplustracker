@@ -1,25 +1,39 @@
 /* 🌍 General Container */
 .order-tracking-container {
   text-align: center;
-  padding: 40px;
+  padding: 40px 20px;
   background: #0a0f24;
   min-height: 100vh;
   color: white;
 }
 
-/* 🔍 Search & Filter */
+/* 🔍 Filter Section */
 .filter-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
-  padding: 15px;
+  gap: 20px;
+  padding: 20px 0;
 }
 
-.search-bar {
-  padding: 12px;
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.filter-group label {
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+  color: #ccc;
+}
+
+/* Inputs & Selects */
+.search-bar,
+.status-filter {
+  padding: 10px 12px;
   font-size: 1rem;
-  border-radius: 8px;
+  border-radius: 6px;
   border: none;
   background: rgba(255, 255, 255, 0.1);
   color: white;
@@ -29,7 +43,7 @@
 }
 
 .search-bar::placeholder {
-  color: #a0a0a0;
+  color: #aaa;
 }
 
 .search-bar:focus {
@@ -37,59 +51,43 @@
   box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.3);
 }
 
-/* 🔵 Select Status Filter */
 .status-filter {
-  padding: 12px;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: none;
   background: linear-gradient(90deg, #2196f3, #64b5f6);
-  color: rgb(0, 0, 0);
+  color: black;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
 
 .status-filter:hover {
-  background: linear-gradient(90deg, #64b5f6, #2196f3);
   transform: scale(1.05);
 }
 
-/* 📊 Order Table */
+/* 📋 Order Table */
 .order-table {
-  width: 90%;
+  width: 100%;
+  max-width: 1000px;
   margin: 20px auto;
   border-collapse: collapse;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0px 2px 10px rgba(0, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
 }
 
 .order-table th,
 .order-table td {
   padding: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   color: white;
 }
 
 .order-table th {
   background: linear-gradient(90deg, #292d77, #6a77e0);
-  color: white;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
-/* 🔄 Clickable Rows */
-.clickable {
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.clickable:hover {
-  background: rgba(0, 255, 255, 0.2);
-}
-
-/* 🟡 Status Colors */
+/* 🟡 Status Color Tags */
 .status.pending {
   color: #ffcc00;
   font-weight: bold;
@@ -105,76 +103,82 @@
   font-weight: bold;
 }
 
+/* ✅ Row Click */
+.clickable {
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.clickable:hover {
+  background: rgba(0, 255, 255, 0.05);
+}
+
+/* 🚨 Delivery Warning Highlights */
+.highlight-orange {
+  background-color: rgba(255, 165, 0, 0.1);
+  border-left: 4px solid orange;
+}
+
+.highlight-red {
+  background-color: rgba(255, 0, 0, 0.1);
+  border-left: 4px solid red;
+}
+
 /* 📄 Order Details */
 .order-details {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
   padding: 20px;
   margin: 20px auto;
-  width: 60%;
+  width: 80%;
   border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.2);
 }
 
 /* 📝 Task List */
 .step {
   list-style-type: none;
   padding: 12px;
-  margin: 8px 0;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 10px 0;
+  background: rgba(255, 255, 255, 0.07);
   border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: 0.3s;
 }
 
-/* 🎯 Task Info */
 .task-info {
-  display: flex;
-  flex-direction: column;
   text-align: left;
   flex-grow: 1;
-  padding-left: 10px;
 }
 
 .task-time {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.6);
-  margin-top: 3px;
+  color: #ccc;
+  margin-top: 5px;
 }
 
-/* 🎯 Action Buttons */
 .action-btn {
-  padding: 5px 8px;
-  font-size: 0.8rem;
+  padding: 6px 10px;
+  font-size: 0.9rem;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
-  border-radius: 4px;
   transition: 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-/* ✅ Done Button */
 .action-btn.done {
   background: linear-gradient(145deg, #16a34a, #1db954);
   color: white;
   width: 28px;
   height: 28px;
-  font-size: 14px;
   border-radius: 50%;
-  box-shadow: 0px 0px 10px rgba(22, 163, 74, 1);
-  transition: all 0.3s ease-in-out;
 }
 
 .action-btn.done:hover {
   background: #128c3a;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
-/* ❌ Delete Button */
 .action-btn.delete {
   background: linear-gradient(145deg, #dc2626, #ff4d4d);
   color: white;
@@ -189,72 +193,84 @@
   transform: scale(1.05);
 }
 
-/* 🔄 Hover Effect */
-.action-btn:hover {
-  opacity: 0.8;
-}
-
-/* 🔄 Order Progress Layout Fix */
-.order-progress-container {
-  overflow-x: auto;
-  white-space: nowrap;
-  padding: 15px;
+.back-btn {
   margin-top: 20px;
+  padding: 10px 20px;
+  background: #222;
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.step-progress {
-  display: inline-flex;
-  gap: 20px;
-  padding-bottom: 10px;
+.add-order-btn {
+  background: #00c7ff;
+  border: none;
+  padding: 10px 14px;
+  font-weight: bold;
+  color: #000;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
 }
 
-.step-progress .step-circle {
-  min-width: 60px;
-  text-align: center;
+.add-order-btn:hover {
+  background: #00a2d6;
 }
 
-/* 📱 Mobile Optimization */
+/* 📱 Mobile Responsive Styles */
 @media (max-width: 768px) {
   .filter-container {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    padding: 0 10px;
   }
 
-  .search-bar {
+  .filter-group {
     width: 100%;
-    font-size: 16px;
+  }
+
+  .search-bar,
+  .status-filter {
+    width: 100%;
   }
 
   .order-table {
+    display: block;
+    overflow-x: auto;
     width: 100%;
+    font-size: 0.85rem;
+  }
+
+  .order-table thead {
+    display: none;
+  }
+
+  .order-table tr {
+    display: block;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .order-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border: none;
+    font-size: 0.9rem;
+  }
+
+  .order-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #aaa;
+    margin-right: 10px;
   }
 
   .order-details {
     width: 95%;
   }
-
-  .step-progress {
-    gap: 10px;
-  }
-}
-.filter-group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.filter-group label {
-  font-size: 0.85rem;
-  color: #ccc;
-  margin-bottom: 4px;
-  padding-left: 4px;
-}
-.highlight-orange {
-  background-color: rgba(255, 165, 0, 0.1);
-  border-left: 4px solid orange;
-}
-
-.highlight-red {
-  background-color: rgba(255, 0, 0, 0.1);
-  border-left: 4px solid red;
 }
