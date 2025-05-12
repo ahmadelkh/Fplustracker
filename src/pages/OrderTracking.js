@@ -111,25 +111,18 @@ const OrderTracking = () => {
       ));
   };
 
-const getRowHighlightClass = (deliveryDate) => {
-  if (!deliveryDate) return "";
-
-  const delivery = new Date(deliveryDate);
-  const today = new Date();
-
-  // Reset to midnight (remove time from comparison)
-  const deliveryMidnight = new Date(delivery.getFullYear(), delivery.getMonth(), delivery.getDate());
-  const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-
-  const diffTime = deliveryMidnight.getTime() - todayMidnight.getTime();
-  const diffDays = diffTime / (1000 * 60 * 60 * 24);
-
-  if (diffDays <= 0) return "highlight-red";           // today or overdue
-  if (diffDays <= 3) return "highlight-orange";        // within 3 days
-  return "";
-};
-
-
+  const getRowHighlightClass = (deliveryDate) => {
+    if (!deliveryDate) return "";
+    const delivery = new Date(deliveryDate);
+    const today = new Date();
+    const deliveryMidnight = new Date(delivery.getFullYear(), delivery.getMonth(), delivery.getDate());
+    const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const diffTime = deliveryMidnight.getTime() - todayMidnight.getTime();
+    const diffDays = diffTime / (1000 * 60 * 60 * 24);
+    if (diffDays < 0) return "highlight-red";
+    if (diffDays <= 3) return "highlight-orange";
+    return "";
+  };
 
   const filtered = applyFilters(filteredOrders);
 
@@ -221,17 +214,17 @@ const getRowHighlightClass = (deliveryDate) => {
                   onClick={() => setSelectedOrder(order)}
                   className={`clickable ${getRowHighlightClass(order.deliveryDate)}`}
                 >
-                  <td>
+                  <td data-label="Order ID">
                     {order.id}
                     {getRowHighlightClass(order.deliveryDate) && (
                       <span style={{ marginLeft: "6px", color: "orange" }}>⚠️</span>
                     )}
                   </td>
-                  <td>{order.receivedDate ? new Date(order.receivedDate).toLocaleDateString() : "N/A"}</td>
-                  <td>{order.productionStartDate ? new Date(order.productionStartDate).toLocaleDateString() : "N/A"}</td>
-                  <td>{order.deliveryDate ? new Date(order.deliveryDate).toLocaleDateString() : "N/A"}</td>
-                  <td>{order.predictedDate ? new Date(order.predictedDate).toLocaleDateString() : "N/A"}</td>
-                  <td className={`status ${order.status.toLowerCase()}`}>{order.status}</td>
+                  <td data-label="Received Date">{order.receivedDate ? new Date(order.receivedDate).toLocaleDateString() : "N/A"}</td>
+                  <td data-label="Production Start">{order.productionStartDate ? new Date(order.productionStartDate).toLocaleDateString() : "N/A"}</td>
+                  <td data-label="Delivery Date">{order.deliveryDate ? new Date(order.deliveryDate).toLocaleDateString() : "N/A"}</td>
+                  <td data-label="Predicted Completion">{order.predictedDate ? new Date(order.predictedDate).toLocaleDateString() : "N/A"}</td>
+                  <td data-label="Status" className={`status ${order.status.toLowerCase()}`}>{order.status}</td>
                 </tr>
               ))
             ) : (
