@@ -184,6 +184,22 @@ const OrderTracking = () => {
             <option value="Done">Done</option>
           </select>
         </div>
+
+          <div className="filter-group" style={{ alignSelf: "flex-end" }}>
+    <button
+      className="clear-filters-btn"
+      onClick={() => {
+        setSearchQuery("");
+        setStatusFilter("");
+        setReceivedDateFilter("");
+        setProductionDateFilter("");
+        setDeliveryDateFilter("");
+        setFilteredOrders(orders);
+      }}
+    >
+      🔄 Clear Filters
+    </button>
+  </div>
       </div>
 
       {userRole === "manager" && (

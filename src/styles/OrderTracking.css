@@ -259,3 +259,17 @@
     color: #ccc;
   }
 }
+.clear-filters-btn {
+  padding: 10px 14px;
+  background: #ff9800;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: 0.3s;
+}
+.clear-filters-btn:hover {
+  background: #e07c00;
+}
