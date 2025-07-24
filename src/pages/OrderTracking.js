@@ -93,9 +93,47 @@ const OrderTracking = () => {
     }
   };
 
+  const getRowHighlightClass = (deliveryDate, status) => {
+    if (status === "Done") return ""; // Don't show red if order is complete
+    if (!deliveryDate) return "";
+
+    const delivery = new Date(deliveryDate);
+    const today = new Date();
+    const deliveryMidnight = new Date(delivery.getFullYear(), delivery.getMonth(), delivery.getDate());
+    const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const diffTime = deliveryMidnight.getTime() - todayMidnight.getTime();
+    const diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+    if (diffDays < 0) return "highlight-red";
+    if (diffDays <= 3) return "highlight-orange";
+    return "";
+  };
+
   const applyFilters = (ordersList) => {
     return ordersList
-      .filter(order => !statusFilter || order.status === statusFilter)
+      .filter(order => {
+        if (!statusFilter) return true;
+
+        if (statusFilter === "Pending Delivery") {
+          return order.steps?.some(step =>
+            step.stepName.toLowerCase().includes("delivered") &&
+            step.status !== "Done"
+          );
+        }
+
+        if (statusFilter === "Pending Installation") {
+          return order.steps?.some(step =>
+            step.stepName.toLowerCase().includes("installed") &&
+            step.status !== "Done"
+          );
+        }
+
+        if (statusFilter === "Pending Red Flag") {
+          return getRowHighlightClass(order.deliveryDate, order.status) === "highlight-red";
+        }
+
+        return order.status === statusFilter;
+      })
       .filter(order => order.id.toLowerCase().includes(searchQuery.toLowerCase()))
       .filter(order => !receivedDateFilter || (
         order.receivedDate &&
@@ -111,23 +149,19 @@ const OrderTracking = () => {
       ));
   };
 
-  const getRowHighlightClass = (deliveryDate) => {
-    if (!deliveryDate) return "";
-    const delivery = new Date(deliveryDate);
-    const today = new Date();
-    const deliveryMidnight = new Date(delivery.getFullYear(), delivery.getMonth(), delivery.getDate());
-    const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    const diffTime = deliveryMidnight.getTime() - todayMidnight.getTime();
-    const diffDays = diffTime / (1000 * 60 * 60 * 24);
-    if (diffDays < 0) return "highlight-red";
-    if (diffDays <= 3) return "highlight-orange";
-    return "";
-  };
-
   const filtered = applyFilters(filteredOrders);
 
   return (
     <div className="order-tracking-container">
+      <button
+       onClick={() => {
+    document.body.classList.toggle("light-mode");
+                       }}
+            className="mode-toggle-btn"
+          >
+             🌓 Toggle Mode
+       </button>
+
       <h1>Order Tracking</h1>
 
       <div className="filter-container">
@@ -173,7 +207,7 @@ const OrderTracking = () => {
         </div>
 
         <div className="filter-group">
-          <label>Status</label>
+          <label>Order Filter</label>
           <select
             className="status-filter"
             value={statusFilter}
@@ -182,24 +216,27 @@ const OrderTracking = () => {
             <option value="">All</option>
             <option value="In Progress">In Progress</option>
             <option value="Done">Done</option>
+            <option value="Pending Delivery">Pending Delivery</option>
+            <option value="Pending Installation">Pending Installation</option>
+            <option value="Pending Red Flag">All Pending (Red Flag)</option>
           </select>
         </div>
 
-          <div className="filter-group" style={{ alignSelf: "flex-end" }}>
-    <button
-      className="clear-filters-btn"
-      onClick={() => {
-        setSearchQuery("");
-        setStatusFilter("");
-        setReceivedDateFilter("");
-        setProductionDateFilter("");
-        setDeliveryDateFilter("");
-        setFilteredOrders(orders);
-      }}
-    >
-      🔄 Clear Filters
-    </button>
-  </div>
+        <div className="filter-group" style={{ alignSelf: "flex-end" }}>
+          <button
+            className="clear-filters-btn"
+            onClick={() => {
+              setSearchQuery("");
+              setStatusFilter("");
+              setReceivedDateFilter("");
+              setProductionDateFilter("");
+              setDeliveryDateFilter("");
+              setFilteredOrders(orders);
+            }}
+          >
+            🔄 Clear Filters
+          </button>
+        </div>
       </div>
 
       {userRole === "manager" && (
@@ -228,11 +265,11 @@ const OrderTracking = () => {
                 <tr
                   key={order.id}
                   onClick={() => setSelectedOrder(order)}
-                  className={`clickable ${getRowHighlightClass(order.deliveryDate)}`}
+                  className={`clickable ${getRowHighlightClass(order.deliveryDate, order.status)}`}
                 >
                   <td data-label="Order ID">
                     {order.id}
-                    {getRowHighlightClass(order.deliveryDate) && (
+                    {getRowHighlightClass(order.deliveryDate, order.status) === "highlight-red" && (
                       <span style={{ marginLeft: "6px", color: "orange" }}>⚠️</span>
                     )}
                   </td>

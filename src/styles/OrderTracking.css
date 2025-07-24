@@ -2,9 +2,28 @@
 .order-tracking-container {
   text-align: center;
   padding: 40px 20px;
-  background: #0a0f24;
+  background: radial-gradient(circle at top, #0a0f24, #030614);
   min-height: 100vh;
   color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  backdrop-filter: blur(6px);
+}
+
+/* 🔘 Mode Toggle Button */
+.mode-toggle-btn {
+  background: linear-gradient(to right, #444, #777);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+body.light-mode .mode-toggle-btn {
+  background: linear-gradient(to right, #ddd, #bbb);
+  color: black;
 }
 
 /* 🔍 Filter Section */
@@ -14,6 +33,10 @@
   justify-content: center;
   gap: 20px;
   padding: 20px 0;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 4px 12px rgba(0, 255, 255, 0.05);
 }
 
 .filter-group {
@@ -65,13 +88,15 @@
 /* 📋 Order Table */
 .order-table {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 20px auto;
   border-collapse: collapse;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeInUp 0.6s ease-out;
 }
 
 .order-table th,
@@ -83,7 +108,9 @@
 }
 
 .order-table th {
-  background: linear-gradient(90deg, #292d77, #6a77e0);
+  background: linear-gradient(270deg, #292d77, #6a77e0, #2196f3);
+  background-size: 600% 600%;
+  animation: gradientShift 8s ease infinite;
   font-size: 1rem;
 }
 
@@ -204,7 +231,7 @@
 }
 
 .add-order-btn {
-  background: #00c7ff;
+  background: linear-gradient(145deg, #00c7ff, #00a2d6);
   border: none;
   padding: 10px 14px;
   font-weight: bold;
@@ -212,11 +239,32 @@
   border-radius: 8px;
   font-size: 0.9rem;
   cursor: pointer;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+  transition: all 0.3s ease;
 }
 
 .add-order-btn:hover {
-  background: #00a2d6;
+  background: #00e1ff;
+  transform: scale(1.05);
+  box-shadow: 0 0 14px rgba(0, 255, 255, 0.4);
 }
+
+.clear-filters-btn {
+  padding: 10px 14px;
+  background: #ff9800;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: 0.3s;
+}
+.clear-filters-btn:hover {
+  background: #e07c00;
+}
+
+/* 📱 Mobile Styles */
 @media (max-width: 768px) {
   .order-table {
     width: 100%;
@@ -235,7 +283,7 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     padding: 12px;
-    box-shadow: 0 2px 4px rgba(0,255,255,0.1);
+    box-shadow: 0 2px 4px rgba(0, 255, 255, 0.1);
   }
 
   .order-table td {
@@ -259,17 +307,86 @@
     color: #ccc;
   }
 }
-.clear-filters-btn {
-  padding: 10px 14px;
-  background: #ff9800;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 5px;
-  transition: 0.3s;
+
+/* 🔄 Animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.clear-filters-btn:hover {
-  background: #e07c00;
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🌗 Light Mode Overrides */
+body.light-mode .order-tracking-container {
+  background: linear-gradient(to bottom, #f2f2f2, #eaeaea);
+  color: #222;
+}
+
+body.light-mode .order-table,
+body.light-mode .order-details,
+body.light-mode .filter-container {
+  background: rgba(0, 0, 0, 0.05);
+  color: #000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .order-table th {
+  background: linear-gradient(90deg, #e0e0e0, #ffffff);
+  color: #333;
+  animation: none;
+}
+
+body.light-mode .order-table td {
+  color: #222;
+}
+
+body.light-mode .search-bar,
+body.light-mode .status-filter {
+  background: #fff;
+  color: #222;
+  border: 1px solid #ccc;
+}
+
+body.light-mode .search-bar::placeholder {
+  color: #999;
+}
+
+body.light-mode .status-filter {
+  background: linear-gradient(90deg, #d1eaff, #ffffff);
+  color: #000;
+}
+
+body.light-mode .highlight-red {
+  background-color: rgba(255, 0, 0, 0.08);
+  border-left: 4px solid red;
+}
+
+body.light-mode .highlight-orange {
+  background-color: rgba(255, 165, 0, 0.08);
+  border-left: 4px solid orange;
+}
+
+body.light-mode .step {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .add-order-btn,
+body.light-mode .clear-filters-btn {
+  color: #000;
+}
+
+body.light-mode .action-btn.done,
+body.light-mode .action-btn.delete,
+body.light-mode .back-btn {
+  color: white;
 }
