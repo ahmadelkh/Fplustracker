@@ -11,10 +11,12 @@ const predefinedSteps = [
   "ASSEMBLAGE",
   "CARCASSE",
   "PEINTURE/NETOYAGE",
+  "Granite",
   "GARNISSAGE/RIDEAU",
-  "READY FOR DELIVERY",
-  "DELIVERED",
-  "INSTALLED",
+  "PRETE POUR LA LIVRAISON",
+  "LIVREE",
+  "INSTALLATION",
+  "REPARATION/MODIFICATION",
 ];
 
 // ⏱️ Working-hour-respecting logic
